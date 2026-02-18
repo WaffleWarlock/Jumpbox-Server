@@ -2,6 +2,7 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Install systemd and essentials
 RUN apt-get update && apt-get install -y \
     systemd \
     systemd-sysv \

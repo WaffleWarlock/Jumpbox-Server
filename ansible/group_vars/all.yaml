@@ -1,0 +1,6 @@
+jumpbox_admin_user: jtadmin
+# Paste your pubkey here (recommended) e.g. contents of ~/.ssh/id_ed25519.pub
+jumpbox_admin_pubkey: ""
+
+jumpbox_banner_enabled: true
+

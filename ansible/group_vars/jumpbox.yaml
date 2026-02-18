@@ -1,0 +1,9 @@
+jumpbox_allow_users:
+  - "{{ jumpbox_admin_user }}"
+  - vagrant
+
+jumpbox_ssh_port: 22
+
+# Docker reality: we restart sshd by bouncing the process (no systemd)
+jumpbox_restart_sshd_method: "pkill"
+

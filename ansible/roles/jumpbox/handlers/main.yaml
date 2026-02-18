@@ -1,0 +1,8 @@
+- name: Restart sshd
+  ansible.builtin.shell: |
+    pkill -f "/usr/sbin/sshd" || true
+    /usr/sbin/sshd -D -e &
+  args:
+    executable: /bin/bash
+  changed_when: true
+

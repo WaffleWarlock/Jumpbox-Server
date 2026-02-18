@@ -1,0 +1,6 @@
+- name: Configure jumpbox prototype (docker)
+  hosts: jumpbox
+  become: true
+  roles:
+    - jumpbox
+

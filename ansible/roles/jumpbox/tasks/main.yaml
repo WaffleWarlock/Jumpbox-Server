@@ -1,0 +1,55 @@
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install baseline packages
+  ansible.builtin.apt:
+    name:
+      - openssh-server
+      - sudo
+      - curl
+      - vim
+      - jq
+      - ufw
+    state: present
+
+- name: Create admin user
+  ansible.builtin.user:
+    name: "{{ jumpbox_admin_user }}"
+    groups: sudo
+    shell: /bin/bash
+    create_home: true
+
+- name: Add authorized key for admin user (recommended)
+  ansible.builtin.authorized_key:
+    user: "{{ jumpbox_admin_user }}"
+    key: "{{ jumpbox_admin_pubkey }}"
+  when: jumpbox_admin_pubkey | length > 0
+
+- name: Install login banner
+  ansible.builtin.copy:
+    src: issue.net
+    dest: /etc/issue.net
+    owner: root
+    group: root
+    mode: "0644"
+  when: jumpbox_banner_enabled | bool
+
+- name: Deploy sshd_config
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Restart sshd
+
+- name: Ensure sshd runtime dir exists
+  ansible.builtin.file:
+    path: /var/run/sshd
+    state: directory
+    mode: "0755"
+
+
+

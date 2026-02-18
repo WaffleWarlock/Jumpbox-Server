@@ -50,6 +50,3 @@
     path: /var/run/sshd
     state: directory
     mode: "0755"
-
-
-

@@ -2,7 +2,7 @@
 Jumpbox server using ansible configurations
 
 ```
-jumpbox-prototype/
+Jumpbox-Server/
 ├─ ansible/
 │  ├─ ansible.cfg
 │  ├─ install/

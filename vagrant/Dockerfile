@@ -47,4 +47,12 @@ RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/
 
 EXPOSE 22
 
+# Vagrant expects its default insecure key to be present for key-based SSH
+RUN mkdir -p /home/vagrant/.ssh \
+ && chmod 700 /home/vagrant/.ssh \
+ && curl -fsSL https://raw.githubusercontent.com/hashicorp/vagrant/main/keys/vagrant.pub \
+    -o /home/vagrant/.ssh/authorized_keys \
+ && chmod 600 /home/vagrant/.ssh/authorized_keys \
+ && chown -R vagrant:vagrant /home/vagrant/.ssh
+
 CMD ["/usr/sbin/sshd", "-D", "-e"]

@@ -1,11 +1,10 @@
 - name: Configure jumpbox prototype (docker)
   hosts: jumpbox
   become: true
-
   vars_files:
     - ../group_vars/all.yaml
     - ../group_vars/jumpbox.yaml
-
   roles:
     - jumpbox
+    - role: prometheus.prometheus.node_exporter
 

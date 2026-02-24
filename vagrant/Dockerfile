@@ -1,6 +1,7 @@
 FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV container=docker
 
 # Install systemd and essentials
 RUN apt-get update && apt-get install -y \
@@ -12,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     python3-apt \
     ca-certificates \
     python-is-python3 \
+    dbus \
     curl \
     vim \
     jq \
@@ -19,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     net-tools \
     ufw \
+    less \
     && rm -rf /var/lib/apt/lists/*
 
 # Remove unnecessary systemd services that cause issues in containers
@@ -56,4 +59,5 @@ RUN mkdir -p /home/vagrant/.ssh \
  && chmod 600 /home/vagrant/.ssh/authorized_keys \
  && chown -R vagrant:vagrant /home/vagrant/.ssh
 
-CMD ["/usr/sbin/sshd", "-D", "-e"]
+#CMD ["/usr/sbin/sshd", "-D", "-e"]
+CMD ["/sbin/init"]

@@ -43,7 +43,7 @@
     owner: root
     group: root
     mode: "0600"
-  notify: Restart sshd
+#  notify: Restart sshd
 
 - name: Ensure sshd runtime dir exists
   ansible.builtin.file:
